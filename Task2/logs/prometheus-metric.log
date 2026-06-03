@@ -1,0 +1,12 @@
+# Метрика http_requests_total в Prometheus (захват через API /api/v1/query)
+серий: 10
+pod=scaletestapp-5c8f45b4b7-pxf5w  job=scaletestapp  http_requests_total=23638
+pod=scaletestapp-5c8f45b4b7-mw6xv  job=scaletestapp  http_requests_total=0
+pod=scaletestapp-5c8f45b4b7-vsltg  job=scaletestapp  http_requests_total=0
+pod=scaletestapp-5c8f45b4b7-w4pgm  job=scaletestapp  http_requests_total=0
+pod=scaletestapp-5c8f45b4b7-7tnxx  job=scaletestapp  http_requests_total=0
+pod=scaletestapp-5c8f45b4b7-72p59  job=scaletestapp  http_requests_total=0
+pod=scaletestapp-5c8f45b4b7-wplwb  job=scaletestapp  http_requests_total=0
+pod=scaletestapp-5c8f45b4b7-8r4sw  job=scaletestapp  http_requests_total=0
+pod=scaletestapp-5c8f45b4b7-fphj4  job=scaletestapp  http_requests_total=0
+pod=scaletestapp-5c8f45b4b7-kh79v  job=scaletestapp  http_requests_total=0

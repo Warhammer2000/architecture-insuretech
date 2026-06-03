@@ -1,0 +1,132 @@
+# Task2 Часть 2. Повторный прогон, Locust внутри кластера бьёт в сервис
+configmap/locustfile created
+pod/locust-load created
+pod/locust-load condition met
+## базовое состояние
+NAME           REFERENCE                 TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+scaletestapp   Deployment/scaletestapp   0/10      1         10        1          7m14s
+=== sample 1 ===
+scaletestapp   Deployment/scaletestapp   0/10   1     10    1     7m14s
+app pods: 1
+=== sample 2 ===
+scaletestapp   Deployment/scaletestapp   0/10   1     10    1     7m24s
+app pods: 1
+=== sample 3 ===
+scaletestapp   Deployment/scaletestapp   0/10   1     10    1     7m34s
+app pods: 1
+=== sample 4 ===
+scaletestapp   Deployment/scaletestapp   21702m/10   1     10    1     7m45s
+app pods: 3
+=== sample 5 ===
+scaletestapp   Deployment/scaletestapp   52812m/10   1     10    3     7m55s
+app pods: 6
+=== sample 6 ===
+scaletestapp   Deployment/scaletestapp   52812m/10   1     10    3     8m5s
+app pods: 6
+=== sample 7 ===
+scaletestapp   Deployment/scaletestapp   27950m/10   1     10    6     8m16s
+app pods: 9
+=== sample 8 ===
+scaletestapp   Deployment/scaletestapp   19930m/10   1     10    9     8m26s
+app pods: 10
+=== sample 9 ===
+scaletestapp   Deployment/scaletestapp   19930m/10   1     10    9     8m36s
+app pods: 10
+=== sample 10 ===
+scaletestapp   Deployment/scaletestapp   11083m/10   1     10    10    8m47s
+app pods: 10
+=== sample 11 ===
+scaletestapp   Deployment/scaletestapp   10069m/10   1     10    10    8m57s
+app pods: 10
+=== sample 12 ===
+scaletestapp   Deployment/scaletestapp   10069m/10   1     10    10    9m7s
+app pods: 10
+=== sample 13 ===
+scaletestapp   Deployment/scaletestapp   9988m/10   1     10    10    9m17s
+app pods: 10
+=== sample 14 ===
+scaletestapp   Deployment/scaletestapp   10003m/10   1     10    10    9m28s
+app pods: 10
+=== sample 15 ===
+scaletestapp   Deployment/scaletestapp   10003m/10   1     10    10    9m38s
+app pods: 10
+=== sample 16 ===
+scaletestapp   Deployment/scaletestapp   9926m/10   1     10    10    9m48s
+app pods: 10
+=== sample 17 ===
+scaletestapp   Deployment/scaletestapp   10007m/10   1     10    10    9m58s
+app pods: 10
+=== sample 18 ===
+scaletestapp   Deployment/scaletestapp   9969m/10   1     10    10    10m
+app pods: 10
+=== sample 19 ===
+scaletestapp   Deployment/scaletestapp   9969m/10   1     10    10    10m
+app pods: 10
+=== sample 20 ===
+scaletestapp   Deployment/scaletestapp   9970m/10   1     10    10    10m
+app pods: 10
+=== sample 21 ===
+scaletestapp   Deployment/scaletestapp   9919m/10   1     10    10    10m
+app pods: 10
+=== sample 22 ===
+scaletestapp   Deployment/scaletestapp   9919m/10   1     10    10    10m
+app pods: 10
+=== sample 23 ===
+scaletestapp   Deployment/scaletestapp   9987m/10   1     10    10    11m
+app pods: 10
+=== sample 24 ===
+scaletestapp   Deployment/scaletestapp   9992m/10   1     10    10    11m
+app pods: 10
+=== sample 25 ===
+scaletestapp   Deployment/scaletestapp   9992m/10   1     10    10    11m
+app pods: 10
+=== sample 26 ===
+scaletestapp   Deployment/scaletestapp   9985m/10   1     10    10    11m
+app pods: 10
+=== sample 27 ===
+scaletestapp   Deployment/scaletestapp   6970m/10   1     10    10    11m
+app pods: 10
+=== sample 28 ===
+scaletestapp   Deployment/scaletestapp   6970m/10   1     10    10    11m
+app pods: 10
+## логи генератора нагрузки (хвост)
+GET      /                                                                              23296     0(0.00%) |      4       0     283      2 |   97.80        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                     23296     0(0.00%) |      4       0     283      2 |   97.80        0.00
+
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+GET      /                                                                              23485     0(0.00%) |      4       0     283      2 |   99.20        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                     23485     0(0.00%) |      4       0     283      2 |   99.20        0.00
+
+[2026-05-31 13:41:47,546] locust-load/INFO/locust.main: --run-time limit reached, shutting down
+[2026-05-31 13:41:47,608] locust-load/INFO/locust.main: Shutting down (exit code 0)
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+GET      /                                                                              23636     0(0.00%) |      4       0     283      2 |   98.61        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                     23636     0(0.00%) |      4       0     283      2 |   98.61        0.00
+
+Response time percentiles (approximated)
+Type     Name                                                                                  50%    66%    75%    80%    90%    95%    98%    99%  99.9% 99.99%   100% # reqs
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+GET      /                                                                                       2      3      3      3      4      6     24     69    150    220    280  23636
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+         Aggregated                                                                              2      3      3      3      4      6     24     69    150    220    280  23636
+
+## финальное состояние
+NAME           REFERENCE                 TARGETS    MINPODS   MAXPODS   REPLICAS   AGE
+scaletestapp   Deployment/scaletestapp   3640m/10   1         10        10         12m
+NAME                            READY   STATUS    RESTARTS   AGE
+scaletestapp-5c8f45b4b7-72p59   1/1     Running   0          4m9s
+scaletestapp-5c8f45b4b7-7tnxx   1/1     Running   0          4m9s
+scaletestapp-5c8f45b4b7-8r4sw   1/1     Running   0          3m54s
+scaletestapp-5c8f45b4b7-fphj4   1/1     Running   0          3m54s
+scaletestapp-5c8f45b4b7-kh79v   1/1     Running   0          3m39s
+scaletestapp-5c8f45b4b7-mw6xv   1/1     Running   0          4m24s
+scaletestapp-5c8f45b4b7-pxf5w   1/1     Running   0          24m
+scaletestapp-5c8f45b4b7-vsltg   1/1     Running   0          4m24s
+scaletestapp-5c8f45b4b7-w4pgm   1/1     Running   0          4m9s
+scaletestapp-5c8f45b4b7-wplwb   1/1     Running   0          3m54s
+DONE-PART2-SCALEUP

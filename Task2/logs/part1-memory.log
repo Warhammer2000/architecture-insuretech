@@ -1,0 +1,138 @@
+# Task2 Часть 1. HPA по утилизации памяти
+deployment.apps/scaletestapp created
+service/scaletestapp created
+horizontalpodautoscaler.autoscaling/scaletestapp created
+Waiting for deployment "scaletestapp" rollout to finish: 0 of 1 updated replicas are available...
+deployment "scaletestapp" successfully rolled out
+## ожидание появления метрик (70s)
+## базовое состояние до нагрузки
+NAME           REFERENCE                 TARGETS           MINPODS   MAXPODS   REPLICAS   AGE
+scaletestapp   Deployment/scaletestapp   memory: 13%/80%   1         10        1          77s
+NAME                            CPU(cores)   MEMORY(bytes)   
+scaletestapp-5c8f45b4b7-pxf5w   1m           2Mi             
+## старт порт-форварда и нагрузки Locust
+=== sample 1 ===
+scaletestapp   Deployment/scaletestapp   memory: 13%/80%   1     10    1     84s
+pods: 1
+NAME                            CPU(cores)   MEMORY(bytes)   
+scaletestapp-5c8f45b4b7-pxf5w   1m           2Mi             
+=== sample 2 ===
+scaletestapp   Deployment/scaletestapp   memory: 13%/80%   1     10    1     94s
+pods: 1
+NAME                            CPU(cores)   MEMORY(bytes)   
+scaletestapp-5c8f45b4b7-pxf5w   1m           2Mi             
+=== sample 3 ===
+scaletestapp   Deployment/scaletestapp   memory: 13%/80%   1     10    1     104s
+pods: 1
+NAME                            CPU(cores)   MEMORY(bytes)   
+scaletestapp-5c8f45b4b7-pxf5w   1m           2Mi             
+=== sample 4 ===
+scaletestapp   Deployment/scaletestapp   memory: 13%/80%   1     10    1     115s
+pods: 1
+NAME                            CPU(cores)   MEMORY(bytes)   
+scaletestapp-5c8f45b4b7-pxf5w   1m           2Mi             
+=== sample 5 ===
+scaletestapp   Deployment/scaletestapp   memory: 13%/80%   1     10    1     2m5s
+pods: 1
+NAME                            CPU(cores)   MEMORY(bytes)   
+scaletestapp-5c8f45b4b7-pxf5w   1m           2Mi             
+=== sample 6 ===
+scaletestapp   Deployment/scaletestapp   memory: 13%/80%   1     10    1     2m16s
+pods: 1
+NAME                            CPU(cores)   MEMORY(bytes)   
+scaletestapp-5c8f45b4b7-pxf5w   1m           2Mi             
+=== sample 7 ===
+scaletestapp   Deployment/scaletestapp   memory: 13%/80%   1     10    1     2m26s
+pods: 1
+NAME                            CPU(cores)   MEMORY(bytes)   
+scaletestapp-5c8f45b4b7-pxf5w   1m           2Mi             
+=== sample 8 ===
+scaletestapp   Deployment/scaletestapp   memory: 13%/80%   1     10    1     2m36s
+pods: 1
+NAME                            CPU(cores)   MEMORY(bytes)   
+scaletestapp-5c8f45b4b7-pxf5w   1m           2Mi             
+=== sample 9 ===
+scaletestapp   Deployment/scaletestapp   memory: 13%/80%   1     10    1     2m47s
+pods: 1
+NAME                            CPU(cores)   MEMORY(bytes)   
+scaletestapp-5c8f45b4b7-pxf5w   1m           2Mi             
+=== sample 10 ===
+scaletestapp   Deployment/scaletestapp   memory: 13%/80%   1     10    1     2m57s
+pods: 1
+NAME                            CPU(cores)   MEMORY(bytes)   
+scaletestapp-5c8f45b4b7-pxf5w   1m           2Mi             
+=== sample 11 ===
+scaletestapp   Deployment/scaletestapp   memory: 13%/80%   1     10    1     3m8s
+pods: 1
+NAME                            CPU(cores)   MEMORY(bytes)   
+scaletestapp-5c8f45b4b7-pxf5w   1m           2Mi             
+=== sample 12 ===
+scaletestapp   Deployment/scaletestapp   memory: 13%/80%   1     10    1     3m18s
+pods: 1
+NAME                            CPU(cores)   MEMORY(bytes)   
+scaletestapp-5c8f45b4b7-pxf5w   1m           2Mi             
+=== sample 13 ===
+scaletestapp   Deployment/scaletestapp   memory: 13%/80%   1     10    1     3m29s
+pods: 1
+NAME                            CPU(cores)   MEMORY(bytes)   
+scaletestapp-5c8f45b4b7-pxf5w   1m           2Mi             
+=== sample 14 ===
+scaletestapp   Deployment/scaletestapp   memory: 13%/80%   1     10    1     3m39s
+pods: 1
+NAME                            CPU(cores)   MEMORY(bytes)   
+scaletestapp-5c8f45b4b7-pxf5w   1m           2Mi             
+=== sample 15 ===
+scaletestapp   Deployment/scaletestapp   memory: 13%/80%   1     10    1     3m49s
+pods: 1
+NAME                            CPU(cores)   MEMORY(bytes)   
+scaletestapp-5c8f45b4b7-pxf5w   1m           2Mi             
+=== sample 16 ===
+scaletestapp   Deployment/scaletestapp   memory: 13%/80%   1     10    1     4m
+pods: 1
+NAME                            CPU(cores)   MEMORY(bytes)   
+scaletestapp-5c8f45b4b7-pxf5w   1m           2Mi             
+=== sample 17 ===
+scaletestapp   Deployment/scaletestapp   memory: 13%/80%   1     10    1     4m10s
+pods: 1
+NAME                            CPU(cores)   MEMORY(bytes)   
+scaletestapp-5c8f45b4b7-pxf5w   1m           2Mi             
+=== sample 18 ===
+scaletestapp   Deployment/scaletestapp   memory: 13%/80%   1     10    1     4m20s
+pods: 1
+NAME                            CPU(cores)   MEMORY(bytes)   
+scaletestapp-5c8f45b4b7-pxf5w   1m           2Mi             
+=== sample 19 ===
+scaletestapp   Deployment/scaletestapp   memory: 13%/80%   1     10    1     4m31s
+pods: 1
+NAME                            CPU(cores)   MEMORY(bytes)   
+scaletestapp-5c8f45b4b7-pxf5w   1m           2Mi             
+=== sample 20 ===
+scaletestapp   Deployment/scaletestapp   memory: 13%/80%   1     10    1     4m41s
+pods: 1
+NAME                            CPU(cores)   MEMORY(bytes)   
+scaletestapp-5c8f45b4b7-pxf5w   1m           2Mi             
+## стоп нагрузки
+## финальный describe hpa
+Name:                                                     scaletestapp
+Namespace:                                                default
+Labels:                                                   <none>
+Annotations:                                              <none>
+CreationTimestamp:                                        Sun, 31 May 2026 18:18:25 +0500
+Reference:                                                Deployment/scaletestapp
+Metrics:                                                  ( current / target )
+  resource memory on pods  (as a percentage of request):  13% (2768Ki) / 80%
+Min replicas:                                             1
+Max replicas:                                             10
+Deployment pods:                                          1 current / 1 desired
+Conditions:
+  Type            Status  Reason              Message
+  ----            ------  ------              -------
+  AbleToScale     True    ReadyForNewScale    recommended size matches current size
+  ScalingActive   True    ValidMetricFound    the HPA was able to successfully calculate a replica count from memory resource utilization (percentage of request)
+  ScalingLimited  False   DesiredWithinRange  the desired count is within the acceptable range
+Events:
+  Type     Reason                        Age                    From                       Message
+  ----     ------                        ----                   ----                       -------
+  Warning  FailedGetResourceMetric       4m22s (x2 over 4m37s)  horizontal-pod-autoscaler  failed to get memory utilization: unable to get metrics for resource memory: no metrics returned from resource metrics API
+  Warning  FailedComputeMetricsReplicas  4m22s (x2 over 4m37s)  horizontal-pod-autoscaler  invalid metrics (1 invalid out of 1), first error is: failed to get memory resource metric value: failed to get memory utilization: unable to get metrics for resource memory: no metrics returned from resource metrics API
+DONE-PART1
