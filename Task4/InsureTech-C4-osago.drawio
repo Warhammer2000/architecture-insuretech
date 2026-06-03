@@ -1,0 +1,64 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="task4osago" name="InsureTech C4 продажа ОСАГО">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1180" pageHeight="620" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="client" value="Клиент" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="40" y="60" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="partner" value="B2B партнёр" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="40" y="200" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="web" value="Веб-приложение" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="240" y="55" width="170" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="core" value="core-app (логика оформления ОСАГО, WebSocket для предложений)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="470" y="40" width="220" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="osago" value="osago-aggregator (отправка заявок и опрос решений)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="470" y="250" width="230" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="redis" value="Redis (состояние заявок и предложений, pub/sub)" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="810" y="245" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="insurers" value="Страховые компании (REST: создать заявку, получить предложение)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="470" y="430" width="230" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="note_storage" value="osago-aggregator держит своё хранилище. Опрос страховых идёт асинхронно до 60 секунд, а сервис работает в нескольких экземплярах, поэтому состояние нужно вынести из памяти." style="shape=note;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="800" y="40" width="300" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="note_patterns" value="На вызовах страховых применяю Timeout 60 секунд, Retry на временные ошибки и Circuit Breaker на каждую компанию, чтобы одна страховая не роняла весь опрос." style="shape=note;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="740" y="430" width="320" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="note_rl" value="На входе API партнёров применяю Rate Limiting." style="shape=note;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="290" width="230" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="note_instances" value="Предложение может прийти в любой экземпляр core-app. Маршрутизацию к нужному WebSocket делаю через Redis pub/sub по идентификатору заявки." style="shape=note;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="370" width="290" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="c_web" value="HTTPS" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="client" target="web">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="web_core" value="WebSocket, Server push (новая интеграция)" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#0066cc;strokeWidth=2;" edge="1" parent="1" source="web" target="core">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="partner_core" value="REST API, Rate Limiting" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="partner" target="core">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="core_osago" value="команда создать заявку ОСАГО (sync). Timeout, Retry" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="core" target="osago">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="osago_insurers" value="создать заявку и опрос решения (REST). Timeout, Retry, Circuit Breaker" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="osago" target="insurers">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="osago_redis" value="состояние и публикация предложений" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="osago" target="redis">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="redis_core" value="предложение по requestId (pub/sub)" style="edgeStyle=orthogonalEdgeStyle;html=1;dashed=1;" edge="1" parent="1" source="redis" target="core">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
